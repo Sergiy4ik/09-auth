@@ -1,0 +1,30 @@
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+
+import { CreateNotePayload } from "../api";
+
+interface NoteDraftStore {
+    draft: CreateNotePayload;
+    setDraft: (note: CreateNotePayload) => void;
+    clearDraft: () => void;
+}
+ 
+const initialDraft: CreateNotePayload = {
+    title: '',
+    content: '',
+    tag: 'Todo',
+}
+
+export const useDraftStore = create<NoteDraftStore>()(
+    persist(
+        (set) => ({
+            draft: initialDraft,
+            setDraft: (note) => set(() => ({ draft: note })),
+            clearDraft: () => set(() => ({ draft: initialDraft }))
+        }),
+        {
+            name: "note-draft",
+            partialize: (state) => ({ draft: state.draft })
+        }
+    )
+)
