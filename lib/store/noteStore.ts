@@ -1,14 +1,14 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { CreateNotePayload } from "../api";
+import { CreateNotePayload } from "../api/api";
 
 interface NoteDraftStore {
     draft: CreateNotePayload;
     setDraft: (note: CreateNotePayload) => void;
     clearDraft: () => void;
 }
- 
+
 const initialDraft: CreateNotePayload = {
     title: '',
     content: '',

@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { useDebounce } from 'use-debounce';
 
-import { fetchNotes } from '@/lib/api';
+import { fetchNotes } from '@/lib/api/clientApi';
 
 import SearchBox from '@/components/SearchBox/SearchBox';
 import Pagination from '@/components/Pagination/Pagination';
@@ -50,7 +50,7 @@ export default function NotesClient({ tag }: NotesClientProps) {
 
       </header>
 
-      {data && data.notes.length > 0 && (
+      {data && data?.notes?.length > 0 && (
         <NoteList notes={data.notes} />
       )}
 

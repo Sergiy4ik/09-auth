@@ -8,8 +8,9 @@ import type { NoteTag } from '@/types/note';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
-import { createNote, CreateNotePayload } from '@/lib/api';
+import { createNote, CreateNotePayload } from '@/lib/api/clientApi';
 import { useDraftStore } from '@/lib/store/noteStore';
+
 
 
 export default function NoteForm() {
