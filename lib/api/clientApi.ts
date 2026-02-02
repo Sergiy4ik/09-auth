@@ -1,3 +1,5 @@
+"use client";
+
 import type { Note, NoteTag } from "@/types/note";
 import { User } from "@/types/user";
 

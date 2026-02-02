@@ -16,6 +16,7 @@ export default function SignUp() {
     const handleSubmit = async (formData: FormData) => {
         try {
             const formValues = Object.fromEntries(formData) as RegisterRequest;
+            console.log("Register body:", formValues);
             const res = await register(formValues);
             if (res) {
                 setUser(res);
