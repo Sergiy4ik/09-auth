@@ -72,15 +72,15 @@ export const fetchNoteById = async (id: string): Promise<Note> => {
 }
 
 export const register = async (data: RegisterRequest) => {
-    const response = await nextServer.post<User>("/auth/register", data);
+    const res = await nextServer.post<User>("/auth/register", data);
 
-    return response.data;
+    return res.data;
 };
 
 export const login = async (data: LoginRequest) => {
-    const response = await nextServer.post<User>("/auth/login", data);
+    const res = await nextServer.post<User>("/auth/login", data);
 
-    return response.data;
+    return res.data;
 };
 
 export const logout = async (): Promise<void> => {
@@ -88,21 +88,21 @@ export const logout = async (): Promise<void> => {
 };
 
 export const checkSession = async () => {
-    const response = await nextServer.get<CheckSessionRequest>("/auth/session");
+    const { data } = await nextServer.get<CheckSessionRequest>("/auth/session");
 
-    return response.data.success;
+    return data.success;
 };
 
 export const getMe = async () => {
-    const response = await nextServer.get<User>("/users/me");
+    const { data } = await nextServer.get<User>("/users/me");
 
-    return response.data;
+    return data;
 };
 
 export const updateMe = async (data: updateUserRequest) => {
-    const response = await nextServer.patch<User>("/users/me", data);
+    const res = await nextServer.patch<User>("/users/me", data);
 
-    return response.data;
+    return res.data;
 };
 
 // FUNCTIONS END
