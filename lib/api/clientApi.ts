@@ -30,7 +30,7 @@ export type LoginRequest = {
     password: string;
 };
 
-export interface updateUserRequest {
+export type updateUserRequest = {
     email?: string;
     username: string;
 };
