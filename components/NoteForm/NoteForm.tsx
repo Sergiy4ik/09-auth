@@ -5,16 +5,15 @@ import toast from 'react-hot-toast';
 
 import type { NoteTag } from '@/types/note';
 
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
 import { createNote, CreateNotePayload } from '@/lib/api/clientApi';
 import { useDraftStore } from '@/lib/store/noteStore';
 
-
-
 export default function NoteForm() {
     const router = useRouter();
+    const queryClient = useQueryClient()
 
     const { draft, setDraft, clearDraft } = useDraftStore();
 
@@ -27,7 +26,11 @@ export default function NoteForm() {
 
     const mutation = useMutation({
         mutationFn: createNote,
-        onSuccess: () => {
+        onSuccess: async () => {
+            await queryClient.invalidateQueries({
+                queryKey: ["notes"]
+            })
+
             clearDraft()
             router.push("/notes/filter/all");
             toast.success("The note has been added successfully.")

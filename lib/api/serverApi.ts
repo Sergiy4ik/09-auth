@@ -15,7 +15,13 @@ export const fetchNotes = async (page: number = 1, search: string = '', tag?: st
 };
 
 export const fetchNoteById = async (id: string): Promise<Note> => {
-    const { data } = await nextServer.get<Note>(`/notes/${id}`)
+    const cookieStore = await cookies()
+
+    const { data } = await nextServer.get<Note>(`/notes/${id}`, {
+        headers: {
+            Cookie: cookieStore.toString()
+        }
+    })
 
     return data
 }
@@ -33,7 +39,13 @@ export const checkSession = async () => {
 };
 
 export const getMe = async () => {
-    const { data } = await nextServer.get<User>("/users/me");
+    const cookieStore = await cookies()
+
+    const { data } = await nextServer.get<User>("/users/me", {
+        headers: {
+            Cookie: cookieStore.toString()
+        }
+    });
 
     return data;
 };

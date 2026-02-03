@@ -32,13 +32,12 @@ export default function EditProfile() {
                 router.push("/profile");
             }
         } catch (error) {
+            toast.error("Something went wrong...")
             setError(
-                toast.error(
-                    (error as apiError).response?.data?.error ??
-                    (error as apiError).message ??
-                    "Something went wrong...",
-                ),
-            );
+                (error as apiError).response?.data?.error ??
+                (error as apiError).message ??
+                "Something went wrong...",
+            )
         }
     };
 
