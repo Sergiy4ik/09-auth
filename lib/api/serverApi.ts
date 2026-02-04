@@ -7,8 +7,13 @@ import { CheckSessionRequest, FetchNotesResponse } from "./clientApi";
 import { cookies } from "next/headers";
 
 export const fetchNotes = async (page: number = 1, search: string = '', tag?: string): Promise<FetchNotesResponse> => {
+    const cookieStore = await cookies()
+
     const { data } = await nextServer.get<FetchNotesResponse>('/notes', {
         params: { page, perPage: 12, search, tag },
+        headers: {
+            Cookie: cookieStore.toString()
+        }
     });
 
     return data;
